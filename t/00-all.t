@@ -10,7 +10,7 @@ use_ok('Tie::DictFile');
 my %words; 
 tie %words, 'Tie::DictFile',$file;
 
-ok(defined %words,"tie succeeded"); 
+ok(keys(%words),"tie succeeded"); 
 
 ok(exists $words{'hello'},"'hello' defined in dictionary"); 
 is($words{'hello'},$words{'Hello'},"varying case of keys returns same values"); 
@@ -20,7 +20,7 @@ untie %words;
 
 tie %words, 'Tie::DictFile',$file;
 
-ok(defined %words,"second tie succeeded"); 
+ok(keys(%words),"second tie succeeded"); 
 
 ok(exists $words{'hello'},"'hello' defined in dictionary"); 
 ok(! exists $words{'goodbye'},"'goodbye' not defined in dictionary"); 
@@ -37,7 +37,7 @@ untie %words;
 
 tie %words, 'Tie::DictFile',$file;
 
-ok(defined %words,"third tie succeeded"); 
+ok(keys(%words),"third tie succeeded"); 
 
 ok(! exists $words{'hello'},"'hello' not defined in dictionary"); 
 ok(exists $words{'goodbye'},"'goodbye' is defined in dictionary"); 

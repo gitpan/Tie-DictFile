@@ -3,7 +3,7 @@ package Tie::DictFile;
 use IO::File;
 use Carp;
 
-$VERSION="0.01";
+$VERSION="0.03";
 
 use strict;
 
@@ -148,7 +148,7 @@ sub DESTROY {
 	        if(! -w $self->{dictionary});
     
         my @operations;    
-        foreach my $word (sort (keys %{$self->{add_to_file}}, 
+        foreach my $word (sort(keys %{$self->{add_to_file}}, 
                                 keys %{$self->{delete_from_file}})) {
             if(exists $self->{add_to_file}->{$word}) {
 				croak "fatal error, we should have an insertion position for: $word"
@@ -201,7 +201,8 @@ sub DESTROY {
         
         undef $self->{fh};
         undef $fhout;
-        my $fhout=new IO::File ">" . $self->{dictionary};
+
+        $fhout=new IO::File ">" . $self->{dictionary};
         my $fhin=new IO::File "<$filename";
 
         while(<$fhin>) {
